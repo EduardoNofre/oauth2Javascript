@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p>Clique e veja no alerta javascript o  token recuperado</p>
+<input type="button" class="btn btn-primary" value="oauth 2.0" onclick="javascript:pegarToken();" />
+</p> <h2>So funciona via browser</h2></p>
+<script>
+function pegarToken() {
+	
+    var token;    
+    var userName = "5j056414cnaj5tlndgf1eic9eb";    
+    var passWord = "9a2to25n5eus7kr25915sbd7j0rl9sp51qv57arvo0ecfjhl56h";    
+    var url = "https://auth.hml.caradhras.io/oauth2/token";
+    this.gerarToken(url,userName,passWord);
+}
+
+function gerarToken(url, clientID, clientSecret) {
+
+    var key;    
+    var request = new XMLHttpRequest();
+    request.open("POST", url, true);    
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");    
+    request.send("grant_type=client_credentials&client_id="+clientID+"&"+"client_secret="+clientSecret);    
+    request.onreadystatechange = function () {    
+        
+        if (request.readyState == request.DONE) {            
+            var response = request.responseText;           
+            var obj = JSON.parse(response);            
+            key = obj.access_token;             
+            token = key;
+            alert(token)
+        }
+    }
+}
+</script>
+</body>
+</html>
